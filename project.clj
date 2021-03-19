@@ -17,7 +17,7 @@
             [lein-bikeshed "0.5.1"]
             [lein-environ "1.1.0"]
             [lein-cprint "1.3.0"]
-            [lein-cloverage "1.0.11"]
+            [lein-cloverage "1.2.2"]
             [com.github.metaphor/lein-flyway "6.0.0"]
             [com.jakemccrary/lein-test-refresh "0.23.0"]]
   :ring {:handler       ga.rugal.clojure.main/main
