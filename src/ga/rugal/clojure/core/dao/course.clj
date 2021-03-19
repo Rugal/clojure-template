@@ -1,9 +1,9 @@
 (ns ga.rugal.clojure.core.dao.course
   "namespace for course dao"
-  (:require [korma.core :as korma])
-  (:require [ga.rugal.clojure.core.model.entity :refer :all]))
+  (:require [korma.core :as korma]
+            [ga.rugal.clojure.core.model.entity :refer :all]))
 
-(defn get-by-id
+(defn get
   "get course by id"
   [id]
   (first
@@ -29,6 +29,6 @@
 (defn delete
   "delete course"
   [id]
-  (if (get-by-id id)
+  (if (get id)
     (korma/delete course
                   (korma/where {:id id}))))

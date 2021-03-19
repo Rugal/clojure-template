@@ -1,5 +1,5 @@
 (ns ga.rugal.clojure.core.dao.course-test
-  "test namespace for course dao"
+  "integration test for course dao"
   (:require [clojure.test :refer :all]
             [ga.rugal.clojure.base :as b]
             [ga.rugal.clojure.core.dao.course :as course]))
@@ -19,5 +19,5 @@
 
 (deftest get-by-id
   (testing "get by id"
-    (let [row (course/get-by-id (:id *bean*))]
+    (let [row (course/get (:id *bean*))]
       (is (= *bean* row)))))

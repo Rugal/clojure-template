@@ -13,7 +13,7 @@
     {:status 404}))
 
 (defn save [bean]
-  (if (and (course-dao/get-by-id (:cid bean))
+  (if (and (course-dao/get (:cid bean))
            (student-dao/get-by-id (:sid bean)))
     (if-let [b (dao/save bean)]
       {:status 201 :body b}

@@ -6,7 +6,7 @@
             [ring.util.request :as r]))
 
 (defn- get-by-id [id]
-  (if-let [bean (s/get-by-id id)]
+  (if-let [bean (s/get id)]
     {:status 200 :body bean}
     {:status 404}))
 
@@ -16,13 +16,13 @@
     {:status 400}))
 
 (defn- delete [id]
-  (if-let [bean (s/get-by-id id)]
+  (if-let [bean (s/get id)]
     (let [r (s/delete id)] {:status 204})
     {:status 404}))
 
 (defn- update [id bean]
   (let [b (assoc bean :id id)]
-    (if (s/get-by-id id)
+    (if (s/get id)
       (if (s/update b)
         {:status 200 :body b}
         {:status 400})

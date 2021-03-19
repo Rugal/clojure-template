@@ -1,34 +1,50 @@
 (ns ga.rugal.clojure.core.service.course-test
+  "unit test for course service"
   (:require [clojure.test :refer :all]
-            [ga.rugal.clojure.core.service.course :as course]
+            [ga.rugal.clojure.core.service.course :as service]
+            [ga.rugal.clojure.core.dao.course :as dao]
             [ga.rugal.clojure.base :as b]))
 
-(def ^:dynamic *bean* b/course-bean)
-
-(defn- wrap-setup [f]
-  (binding [*bean* (course/save *bean*)]
-    (f)
-    (course/delete (:id *bean*))))
-
-(use-fixtures :each wrap-setup)
-
-(deftest get-by-id
-  (testing "get by id"
-    (let [row (course/get-by-id (:id *bean*))] (is row))
-    (let [row (course/get-by-id nil)] (is (= row nil)))
-    ))
+(deftest get
+  (let [bean {:id 0 :name "test"}]
+    (with-redefs [dao/get (fn [id] bean)]
+      (testing "with parameter"
+        (is (= (service/get 1) bean)))
+      (testing "without parameter"
+        (is (= (service/get nil) nil)))
+      )
+    )
+  )
 
 (deftest save
-  (testing "save"
-    (let [row (course/save *bean*)] (is (= (:name *bean*) (:name row))))
-    (let [row (course/save {:key "value"})] (is (= nil row)))))
+  (let [bean {:id 0 :name "test"}]
+    (with-redefs [dao/save (fn [b] bean)]
+      (testing "with :name"
+        (is (= (service/save {:name "test"}) bean)))
+      (testing "without :name"
+        (is (= (service/save {:key "test"}) nil)))
+      )
+    )
+  )
 
 (deftest update
-  (testing "update"
-    (let [row (course/update *bean*)] (is (= 1 row)))
-    (let [row (course/update {:key "value"})] (is (= nil row)))))
+  (let [bean {:id 0 :name "test"}]
+    (with-redefs [dao/update (fn [b] 1)]
+      (testing "with all"
+        (is (= (service/update bean) 1)))
+      (testing "without :name"
+        (is (= (service/update {:id 0}) nil)))
+      (testing "without :id"
+        (is (= (service/update {:name "test"}) nil)))
+      )
+    )
+  )
 
 (deftest delete
-  (testing "delete"
-    (let [row (course/delete (:id *bean*))] (is (= 1 row)))
-    (let [row (course/delete 0)] (is (= nil row)))))
+  (with-redefs [dao/delete (fn [b] 1)]
+    (testing "with parameter"
+      (is (= (service/delete 0) 1)))
+    (testing "without parameter"
+      (is (= (service/delete nil) nil)))
+    )
+  )
