@@ -1,7 +1,5 @@
 # hello-world
 
-FIXME
-
 ## Prerequisites
 
 You will need [Leiningen][] 2.0.0 or above installed.
@@ -12,8 +10,38 @@ You will need [Leiningen][] 2.0.0 or above installed.
 
 To start a web server for the application, run:
 
-    lein ring server
+```shell
+lein ring server
+```
 
-## License
+## check code style
 
-Copyright © 2021 FIXME
+```shell
+lein bikeshed -v
+```
+
+## Test
+
+### test with auto refresh
+
+```shell
+lein test-refresh
+```
+
+### run with profile
+
+```shell
+lein with-profile dev,default test-refresh
+```
+
+### run single namespace
+
+```shell
+lein test :only namespace_name
+```
+
+### run single test in namespace
+
+```shell
+lein test :only namespace_name/testname
+```

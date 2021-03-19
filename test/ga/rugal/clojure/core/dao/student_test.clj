@@ -2,21 +2,22 @@
   "test namespace for student dao"
   (:require [clojure.test :refer :all]
             [ga.rugal.clojure.base :as b]
-            [ga.rugal.clojure.core.dao.student :refer :all]))
+            [ga.rugal.clojure.core.dao.student :as student]))
 
 (def ^:dynamic *bean* b/student-bean)
 
 (defn- wrap-setup [f]
-  (binding [*bean* (save *bean*)]
+  (binding [*bean* (student/save *bean*)]
     (f)
-    (delete (:id *bean*))))
+    (student/delete (:id *bean*))))
 (use-fixtures :each wrap-setup)
 
-(deftest test-update
+(deftest update
   (testing "update"
-    (let [row (update *bean*)]
+    (let [row (student/update *bean*)]
       (is (= 1 row)))))
 
-(deftest test-get-by-id
+(deftest get-by-id
   (testing "get by id"
-    (is (not (empty? *bean*)))))
+    (let [row (student/get-by-id (:id *bean*))]
+      (is (= *bean* row)))))

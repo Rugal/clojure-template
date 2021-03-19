@@ -1,31 +1,31 @@
 (ns ga.rugal.clojure.controller.course
   "namespace for course controller"
-  (:require [ga.rugal.clojure.core.dao.course :as s]
+  (:require [ga.rugal.clojure.core.service.course :as s]
             [compojure.core :refer :all]
             [compojure.coercions :as co]
             [ring.util.request :as r]))
 
-(defn get-by-id [id]
+(defn- get-by-id [id]
   (if-let [bean (s/get-by-id id)]
     {:status 200 :body bean}
     {:status 404}))
 
-(defn save [bean]
+(defn- save [bean]
   (if-let [b (s/save bean)]
     {:status 201 :body b}
-    {:status 500}))
+    {:status 400}))
 
-(defn delete [id]
+(defn- delete [id]
   (if-let [bean (s/get-by-id id)]
     (let [r (s/delete id)] {:status 204})
     {:status 404}))
 
-(defn update [id bean]
+(defn- update [id bean]
   (let [b (assoc bean :id id)]
     (if (s/get-by-id id)
       (if (s/update b)
         {:status 200 :body b}
-        {:status 500})
+        {:status 400})
       {:status 404})))
 
 (def controller

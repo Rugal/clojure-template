@@ -20,10 +20,9 @@
             [lein-cloverage "1.0.11"]
             [com.github.metaphor/lein-flyway "6.0.0"]
             [com.jakemccrary/lein-test-refresh "0.23.0"]]
-  :ring {:handler      ga.rugal.clojure.main/main
-         :auto-reload? true
-         :auto-refresh? true
-         :reload-paths ["src"]}
+  :ring {:handler       ga.rugal.clojure.main/main
+         :auto-reload?  true
+         :auto-refresh? true}
   :test-refresh {:quiet true}
   :flyway {:config-path "resources/database/flyway.properties"}
   :bikeshed {:var-redefs           false
@@ -32,6 +31,6 @@
              :name-collisions      false}
   :profiles {:default     {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
              :ci          {:env {:subname "//localhost:5432/postgres" :username "postgres" :password ""}}
+             :dev         {:dependencies [[ring/ring-mock "0.4.0"]]}
              :development {}
-             :staging     {}
              :production  {}})

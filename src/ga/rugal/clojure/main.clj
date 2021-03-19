@@ -9,14 +9,14 @@
     [ring.middleware.params :refer [wrap-params]]
     [ring.middleware.json :refer [wrap-json-body]]))
 
-(defroutes app-routes
+(defroutes app-route
            course/controller
            student/controller
            registration/controller
            (route/not-found {:status 404}))
 
 (def main
-  (-> app-routes
+  (-> app-route
     (wrap-json-response)
     (wrap-params)
     (wrap-json-body {:keywords? true :bigdecimals? true})))
