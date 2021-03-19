@@ -14,7 +14,7 @@
 
 (defn save [bean]
   (if (and (course-dao/get (:cid bean))
-           (student-dao/get-by-id (:sid bean)))
+           (student-dao/get (:sid bean)))
     (if-let [b (dao/save bean)]
       {:status 201 :body b}
       {:status 500})

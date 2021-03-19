@@ -19,7 +19,7 @@
   (if-let [r (get-by-id id)]
     (-> r
       (assoc
-        :student (student/get-by-id (:student_id r))
+        :student (student/get (:student_id r))
         :course (course/get (:course_id r)))
       (dissoc :course_id :student_id))))
 

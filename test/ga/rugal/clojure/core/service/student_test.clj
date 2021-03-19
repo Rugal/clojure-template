@@ -1,11 +1,11 @@
-(ns ga.rugal.clojure.core.service.course-test
-  "unit test for course service"
+(ns ga.rugal.clojure.core.service.student-test
+  "unit test for studentg service"
   (:require [clojure.test :refer :all]
-            [ga.rugal.clojure.core.service.course :as service]
-            [ga.rugal.clojure.core.dao.course :as dao]))
+            [ga.rugal.clojure.core.service.student :as service]
+            [ga.rugal.clojure.core.dao.student :as dao]))
 
 (deftest get
-  (let [bean {:id 0 :name "test"}]
+  (let [bean {:id 0 :name "test" :age 12}]
     (with-redefs [dao/get (fn [id] bean)]
       (testing "with parameter"
         (is (= (service/get 1) bean)))
@@ -16,25 +16,29 @@
   )
 
 (deftest save
-  (let [bean {:id 0 :name "test"}]
+  (let [bean {:id 0 :name "test" :age 12}]
     (with-redefs [dao/save (fn [b] bean)]
-      (testing "with :name"
+      (testing "with all"
         (is (= (service/save bean) bean)))
       (testing "without :name"
         (is (= (service/save (dissoc bean :name)) nil)))
+      (testing "without :age"
+        (is (= (service/save (dissoc bean :age)) nil)))
       )
     )
   )
 
 (deftest update
-  (let [bean {:id 0 :name "test"}]
+  (let [bean {:id 0 :name "test" :age 12}]
     (with-redefs [dao/update (fn [b] 1)]
       (testing "with all"
         (is (= (service/update bean) 1)))
       (testing "without :name"
-        (is (= (service/save (dissoc bean :name)) nil)))
+        (is (= (service/update (dissoc bean :name)) nil)))
+      (testing "without :age"
+        (is (= (service/update (dissoc bean :age)) nil)))
       (testing "without :id"
-        (is (= (service/save (dissoc bean :id)) nil)))
+        (is (= (service/update (dissoc bean :id)) nil)))
       )
     )
   )
