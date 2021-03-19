@@ -21,7 +21,9 @@
             [com.github.metaphor/lein-flyway "6.0.0"]
             [com.jakemccrary/lein-test-refresh "0.23.0"]]
   :ring {:handler      ga.rugal.clojure.main/main
-         :auto-reload? true}
+         :auto-reload? true
+         :auto-refresh? true
+         :reload-paths ["src"]}
   :test-refresh {:quiet true}
   :flyway {:config-path "resources/database/flyway.properties"}
   :bikeshed {:var-redefs           false
