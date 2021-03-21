@@ -32,6 +32,8 @@
              :name-collisions      false}
   :cloverage {:junit?         true
               :fail-threshold 90}
+  :hooks [environ.leiningen.hooks]
+  :uberjar-name "clojure-standalone.jar"
   :profiles {:default     {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
              :ci          {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
              :development {:env {:subname  "//ec2-3-91-127-228.compute-1.amazonaws.com:5432/d6qbksja2ontqr?sslmode=require"
