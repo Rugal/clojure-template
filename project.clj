@@ -1,5 +1,5 @@
-(defproject hello-world "1.0.0-SNAPSHOT"
-  :description "FIXME: write description"
+(defproject clojure-template "1.0.0-SNAPSHOT"
+  :description "A generic template for clojure"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.10.0"]
@@ -32,7 +32,6 @@
              :name-collisions      false}
   :cloverage {:junit?         true
               :fail-threshold 90}
-  :hooks [environ.leiningen.hooks]
   :uberjar-name "clojure-standalone.jar"
   :profiles {:default     {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
              :ci          {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
