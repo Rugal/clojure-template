@@ -32,6 +32,6 @@
              :name-collisions      false}
   :cloverage {:junit? true}
   :profiles {:default     {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
-             :ci          {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "postgres"}}
+             :ci          {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
              :development {}
              :production  {}})
