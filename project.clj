@@ -16,7 +16,8 @@
   :plugins [[lein-ring "0.12.5"]
             [lein-bikeshed "0.5.1"]
             [lein-environ "1.1.0"]
-            [lein-cprint "1.3.0"]
+            [lein-cprint "1.3.3"]
+            [lein-pprint "1.3.2"]
             [lein-cloverage "1.2.2"]
             [com.github.metaphor/lein-flyway "6.0.0"]
             [com.jakemccrary/lein-test-refresh "0.23.0"]]
@@ -31,6 +32,5 @@
              :name-collisions      false}
   :profiles {:default     {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
              :ci          {:env {:subname "//localhost:5432/postgres" :username "postgres" :password ""}}
-             :dev         {:dependencies [[ring/ring-mock "0.4.0"]]}
              :development {}
              :production  {}})

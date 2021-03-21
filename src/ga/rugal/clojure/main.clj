@@ -1,22 +1,22 @@
 (ns ga.rugal.clojure.main
   (:require
-    [ga.rugal.clojure.controller.course :as course]
-    [ga.rugal.clojure.controller.student :as student]
-    [ga.rugal.clojure.controller.registration :as registration]
-    [compojure.core :refer :all]
-    [compojure.route :as route]
+    [ga.rugal.clojure.controller.course :as c]
+    [ga.rugal.clojure.controller.student :as s]
+    [ga.rugal.clojure.controller.registration :as r]
+    [compojure.core :refer [defroutes]]
+    [compojure.route :refer [not-found]]
     [ring.middleware.json-response :refer [wrap-json-response]]
     [ring.middleware.params :refer [wrap-params]]
     [ring.middleware.json :refer [wrap-json-body]]))
 
 (defroutes app-route
-           course/controller
-           student/controller
-           registration/controller
-           (route/not-found {:status 404}))
+           c/controller
+           s/controller
+           r/controller
+           (not-found {:status 404}))
 
 (def main
   (-> app-route
-    (wrap-json-response)
-    (wrap-params)
-    (wrap-json-body {:keywords? true :bigdecimals? true})))
+      (wrap-json-response)
+      (wrap-params)
+      (wrap-json-body {:keywords? true :bigdecimals? true})))

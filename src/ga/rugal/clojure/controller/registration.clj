@@ -6,24 +6,24 @@
             [compojure.core :refer :all]
             [compojure.coercions :as co]))
 
-(defn get [id]
+(defn- get [id]
   (if-let [bean (r/get id)]
     {:status 200 :body bean}
     {:status 404}))
 
-(defn save [bean]
+(defn- save [bean]
   (if (and (c/get (:course_id bean)) (s/get (:student_id bean)))
     (if-let [b (r/save bean)]
       {:status 201 :body b}
       {:status 400})
     {:status 404}))
 
-(defn delete [id]
+(defn- delete [id]
   (if-let [bean (r/get id)]
     (let [r (r/delete id)] {:status 204})
     {:status 404}))
 
-(defn update [id bean]
+(defn- update [id bean]
   (let [b (assoc bean :id id)]
     (if (r/get id)
       (if (r/update b)

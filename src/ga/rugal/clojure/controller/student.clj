@@ -5,22 +5,22 @@
             [compojure.coercions :as co]
             [ring.util.request :as r]))
 
-(defn get-by-id [id]
+(defn- get [id]
   (if-let [bean (s/get id)]
     {:status 200 :body bean}
     {:status 404}))
 
-(defn save [bean]
+(defn- save [bean]
   (if-let [b (s/save bean)]
     {:status 201 :body b}
     {:status 500}))
 
-(defn delete [id]
+(defn- delete [id]
   (if-let [bean (s/get id)]
     (let [r (s/delete id)] {:status 204})
     {:status 404}))
 
-(defn update [id bean]
+(defn- update [id bean]
   (let [b (assoc bean :id id)]
     (if (s/get id)
       (if (s/update b)
@@ -31,7 +31,7 @@
 (def controller
   (context "/student" []
     (context "/:id" [id :<< co/as-int]
-      (GET "/" [] (get-by-id id))
+      (GET "/" [] (get id))
       (PUT "/" [:as request] (let [bm (:body request)] (update id bm)))
       (DELETE "/" [] (delete id)))
     (POST "/" [:as request] (let [bm (:body request)] (save bm)))))
