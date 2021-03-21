@@ -30,7 +30,8 @@
              :trailing-blank-lines false
              :max-line-length      100
              :name-collisions      false}
+  :cloverage {:junit? true}
   :profiles {:default     {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
-             :ci          {:env {:subname "//localhost:5432/postgres" :username "postgres" :password ""}}
+             :ci          {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "postgres"}}
              :development {}
              :production  {}})

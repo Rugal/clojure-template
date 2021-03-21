@@ -8,12 +8,44 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
+    services:
+      # Label used to access the service container
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: lein deps
-    - name: Run tests
-      run: lein bikeshed
+      - uses: actions/checkout@v2
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: 11
+
+      - name: Restore Build Cache
+        uses: actions/cache@v1.1.2
+        with:
+          path: ~/.m2/repository
+          key: v1-clojure-${{ hashFiles('project.clj') }}
+
+      - name: Install dependencies
+        run: lein deps
+
+      - name: Format code style
+        run: lein bikeshed
+
+      - name: Run test coverage
+        run: lein with-profile ci cloverage
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.9
+        with:
+          # File pattern of test result files
+          files: target/coverage/junit.xml
