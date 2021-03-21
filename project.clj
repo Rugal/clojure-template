@@ -25,7 +25,7 @@
          :auto-reload?  true
          :auto-refresh? true}
   :test-refresh {:quiet true}
-  :flyway {:config-path "resources/database/flyway.properties"}
+  :flyway {:config-path #=(eval (or (System/getenv "flyway_config") "resources/database/flyway.properties"))}
   :bikeshed {:var-redefs           false
              :trailing-blank-lines false
              :max-line-length      100
@@ -34,5 +34,7 @@
               :fail-threshold 90}
   :profiles {:default     {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
              :ci          {:env {:subname "//localhost:5432/postgres" :username "postgres" :password "123"}}
-             :development {}
+             :development {:env {:subname  "//ec2-3-91-127-228.compute-1.amazonaws.com:5432/d6qbksja2ontqr?sslmode=require"
+                                 :username "mjhosjkhlmtwbr"
+                                 :password "c493b1e6d8d3b968686b024f6e1ea4f9b5fb5d9a908de2c9e9cebfc4a6b1986f"}}
              :production  {}})
