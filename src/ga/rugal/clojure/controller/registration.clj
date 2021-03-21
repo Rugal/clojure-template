@@ -1,10 +1,9 @@
 (ns ga.rugal.clojure.controller.registration
   "namespace for registration controller"
   (:require [ga.rugal.clojure.core.service.registration :as r]
-            [ga.rugal.clojure.core.service.student :as s]
-            [ga.rugal.clojure.core.service.course :as c]
             [compojure.core :refer :all]
-            [compojure.coercions :as co]))
+            [compojure.coercions :refer [as-int]])
+  (:import (clojure.lang ExceptionInfo)))
 
 (defn- get [id]
   (if-let [bean (r/get id)]
@@ -12,28 +11,30 @@
     {:status 404}))
 
 (defn- save [bean]
-  (if (and (c/get (:course_id bean)) (s/get (:student_id bean)))
+  (try
     (if-let [b (r/save bean)]
       {:status 201 :body b}
       {:status 400})
-    {:status 404}))
+    (catch ExceptionInfo e {:status (-> e ex-data :status)}))
+  )
 
 (defn- delete [id]
-  (if-let [bean (r/get id)]
-    (let [r (r/delete id)] {:status 204})
+  (if (r/get id)
+    (let [_ (r/delete id)]
+      {:status 204})
     {:status 404}))
 
 (defn- update [id bean]
-  (let [b (assoc bean :id id)]
-    (if (r/get id)
-      (if (r/update b)
-        {:status 200 :body b}
-        {:status 400})
-      {:status 404})))
+  (try
+    (if (r/update (assoc bean :id id))
+      {:status 200}
+      {:status 400})
+    (catch ExceptionInfo e {:status (-> e ex-data :status)}))
+  )
 
 (def controller
   (context "/registration" []
-    (context "/:id" [id :<< co/as-int]
+    (context "/:id" [id :<< as-int]
       (GET "/" [] (get id))
       (PUT "/" [:as request] (let [bm (:body request)] (update id bm)))
       (DELETE "/" [] (delete id)))

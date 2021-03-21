@@ -2,7 +2,7 @@
   "namespace for course controller"
   (:require [ga.rugal.clojure.core.service.course :as s]
             [compojure.core :refer :all]
-            [compojure.coercions :as co]))
+            [compojure.coercions :refer [as-int]]))
 
 (defn- get [id]
   (if-let [bean (s/get id)]
@@ -29,7 +29,7 @@
 
 (def controller
   (context "/course" []
-    (context "/:id" [id :<< co/as-int]
+    (context "/:id" [id :<< as-int]
       (GET "/" [] (get id))
       (PUT "/" [:as request] (let [bm (:body request)] (update id bm)))
       (DELETE "/" [] (delete id)))

@@ -4,7 +4,8 @@
             [ga.rugal.clojure.core.service.registration :as service]
             [ga.rugal.clojure.core.dao.registration :as dao]
             [ga.rugal.clojure.core.service.student :as s]
-            [ga.rugal.clojure.core.service.course :as c]))
+            [ga.rugal.clojure.core.service.course :as c])
+  (:import (clojure.lang ExceptionInfo)))
 
 (deftest get
   (let [course {:id 0 :name "test" :age 0}
@@ -22,10 +23,13 @@
     )
   )
 
-
 (deftest save
-  (let [bean {:id 0 :student_id 0 :course_id 0 :score 0}]
-    (with-redefs [dao/save (fn [b] bean)]
+  (let [course {:id 0 :name "test" :age 0}
+        student {:id 0 :name "test"}
+        bean {:id 0 :student_id 0 :course_id 0 :score 0}]
+    (with-redefs [dao/save (fn [b] bean)
+                  s/get (fn [b] student)
+                  c/get (fn [b] course)]
       (testing "with all"
         (is (= (service/save bean) bean)))
       (testing "without :student_id"
@@ -34,13 +38,24 @@
         (is (= (service/save (dissoc bean :course_id)) nil)))
       (testing "without :score"
         (is (= (service/save (dissoc bean :score)) nil)))
+      (with-redefs [s/get (fn [b] nil)]
+        (testing "student not found"
+          (is (thrown? ExceptionInfo (service/save bean)))))
+      (with-redefs [c/get (fn [b] nil)]
+        (testing "course not found"
+          (is (thrown? ExceptionInfo (service/save bean)))))
       )
     )
   )
 
 (deftest update
-  (let [bean {:id 0 :student_id 0 :course_id 0 :score 0}]
-    (with-redefs [dao/update (fn [b] 1)]
+  (let [course {:id 0 :name "test" :age 0}
+        student {:id 0 :name "test"}
+        bean {:id 0 :student_id 0 :course_id 0 :score 0}]
+    (with-redefs [dao/update (fn [b] 1)
+                  dao/get (fn [b] bean)
+                  s/get (fn [b] student)
+                  c/get (fn [b] course)]
       (testing "with all"
         (is (= (service/update bean) 1)))
       (testing "without :student_id"
@@ -51,6 +66,15 @@
         (is (= (service/update (dissoc bean :score)) nil)))
       (testing "without :id"
         (is (= (service/update (dissoc bean :id)) nil)))
+      (with-redefs [dao/get (fn [b] nil)]
+        (testing "registration not found"
+          (is (thrown? ExceptionInfo (service/update bean)))))
+      (with-redefs [s/get (fn [b] nil)]
+        (testing "student not found"
+          (is (thrown? ExceptionInfo (service/update bean)))))
+      (with-redefs [c/get (fn [b] nil)]
+        (testing "course not found"
+          (is (thrown? ExceptionInfo (service/update bean)))))
       )
     )
   )

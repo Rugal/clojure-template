@@ -18,13 +18,21 @@
   "save"
   [bean]
   (if (and (:student_id bean) (:course_id bean) (:score bean))
-    (dao/save bean)))
+    (if (and (s/get (:student_id bean)) (c/get (:course_id bean)))
+      (dao/save bean)
+      (throw (ex-info "dependency not found" {:status 404})))
+    )
+  )
 
 (defn update
   "update"
   [bean]
   (if (and (:id bean) (:student_id bean) (:course_id bean) (:score bean))
-    (dao/update bean)))
+    (if (and (dao/get (:id bean)) (s/get (:student_id bean)) (c/get (:course_id bean)))
+      (dao/update bean)
+      (throw (ex-info "dependency not found" {:status 404})))
+    )
+  )
 
 (defn delete
   "delete"
