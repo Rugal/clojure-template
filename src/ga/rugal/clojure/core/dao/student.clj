@@ -8,29 +8,26 @@
   [id]
   (first
     (korma/select student
-      (korma/fields :id :name :age)
-      (korma/where {:id id}))))
+                  (korma/fields :id :name :age)
+                  (korma/where {:id id}))))
 
 (defn save
   "save student"
   [bean]
-  (if bean
-    (korma/insert student
-      (korma/values {:name (:name bean)
-                     :age (:age bean)}))))
+  (korma/insert student
+                (korma/values {:name (:name bean)
+                               :age  (:age bean)})))
 
 (defn update
   "update student"
   [bean]
-  (if bean
-    (korma/update student
-      (korma/set-fields {:name (:name bean)
-                         :age (:age bean)})
-      (korma/where {:id (:id bean)}))))
+  (korma/update student
+                (korma/set-fields {:name (:name bean)
+                                   :age  (:age bean)})
+                (korma/where {:id (:id bean)})))
 
 (defn delete
   "delete student"
   [id]
-  (if (get id)
-    (korma/delete student
-      (korma/where {:id id}))))
+  (korma/delete student
+                (korma/where {:id id})))

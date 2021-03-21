@@ -18,7 +18,6 @@
   "update"
   [bean]
   (if (and (:id bean) (:name bean))
-    ;(if (:name bean)
     (dao/update bean)))
 
 (defn delete

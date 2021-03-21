@@ -32,9 +32,9 @@
       (testing "with all"
         (is (= (service/update bean) 1)))
       (testing "without :name"
-        (is (= (service/save (dissoc bean :name)) nil)))
+        (is (= (service/update (dissoc bean :name)) nil)))
       (testing "without :id"
-        (is (= (service/save (dissoc bean :id)) nil)))
+        (is (= (service/update (dissoc bean :id)) nil)))
       )
     )
   )

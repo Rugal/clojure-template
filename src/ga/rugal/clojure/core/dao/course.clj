@@ -14,21 +14,18 @@
 (defn save
   "save course"
   [bean]
-  (if bean
-    (korma/insert course
-                  (korma/values {:name (:name bean)}))))
+  (korma/insert course
+                (korma/values {:name (:name bean)})))
 
 (defn update
   "update course"
   [bean]
-  (if bean
-    (korma/update course
-                  (korma/set-fields {:name (:name bean)})
-                  (korma/where {:id (:id bean)}))))
+  (korma/update course
+                (korma/set-fields {:name (:name bean)})
+                (korma/where {:id (:id bean)})))
 
 (defn delete
   "delete course"
   [id]
-  (if (get id)
-    (korma/delete course
-                  (korma/where {:id id}))))
+  (korma/delete course
+                (korma/where {:id id})))

@@ -19,6 +19,6 @@
 (korma/defentity registration
                  (korma/table :school.registration)
                  (korma/pk :id)
-                 (korma/belongs-to student {:fk :id})
-                 (korma/belongs-to course {:fk :id}))
+                 (korma/belongs-to student)
+                 (korma/belongs-to course))
 

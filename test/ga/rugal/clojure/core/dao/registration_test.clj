@@ -18,5 +18,5 @@
 
 (deftest get-by-id
   (testing "get by id"
-    (let [row (registration/get-by-id (:id *bean*))]
+    (let [row (registration/get (:id *bean*))]
       (is (= *bean* row)))))
