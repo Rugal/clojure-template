@@ -17,7 +17,7 @@
     (let [row (student/update *bean*)]
       (is (= 1 row)))))
 
-(deftest get-by-id
+(deftest get
   (testing "get by id"
     (let [row (student/get (:id *bean*))]
       (is (= *bean* row)))))

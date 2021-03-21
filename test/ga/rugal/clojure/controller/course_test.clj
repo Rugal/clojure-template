@@ -1,11 +1,10 @@
 (ns ga.rugal.clojure.controller.course-test
   (:require [clojure.test :refer :all]
-            [ga.rugal.clojure.main :refer [app-route]]
             [ga.rugal.clojure.base :as b]
             [ga.rugal.clojure.core.service.course :as s]))
 
 (deftest get
-  (with-redefs [s/get (fn [id] {:id 0 :name "test" :age 0})]
+  (with-redefs [s/get (fn [id] {:id 0 :name "test"})]
     (testing "found"
       (is (= 200 (:status (b/request "/course/0" :get {}))))))
   (with-redefs [s/get (fn [id] nil)]
@@ -14,7 +13,7 @@
   )
 
 (deftest delete
-  (with-redefs [s/get (fn [id] {:id 0 :name "test" :age 0})]
+  (with-redefs [s/get (fn [id] {:id 0 :name "test"})]
     (testing "found"
       (is (= 204 (:status (b/request "/course/0" :delete {}))))))
   (with-redefs [s/get (fn [id] nil)]
@@ -23,7 +22,7 @@
   )
 
 (deftest update
-  (let [bean {:id 0 :name "test" :age 0}]
+  (let [bean {:id 0 :name "test"}]
     (with-redefs [s/get (fn [id] bean)]
       (testing "found"
         (is (= 200 (:status (b/request "/course/0" :put {} bean)))))
@@ -38,7 +37,7 @@
   )
 
 (deftest save
-  (let [bean {:id 0 :name "test" :age 0}]
+  (let [bean {:id 0 :name "test"}]
     (with-redefs [s/save (fn [id] bean)]
       (testing "found"
         (is (= 201 (:status (b/request "/course" :post {} bean)))))
