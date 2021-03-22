@@ -1,1 +1,1 @@
-web: java -jar target/*-standalone.jar
+web: java $JVM_OPTS -jar target/*-standalone.jar
