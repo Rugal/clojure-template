@@ -1,0 +1,29 @@
+{:objects
+ {:Student
+  {:description "Student object"
+   :fields
+                {:id   {:type (non-null Int) :description "Student id"}
+                 :name {:type (non-null String)}
+                 :age  {:type (non-null String)}}}
+  :Course
+  {:description "Course object"
+   :fields
+                {:id   {:type (non-null Int) :description "Course id"}
+                 :name {:type (non-null String)}}}
+  :Registration
+  {:description "Registration object"
+   :fields
+                {:id      {:type (non-null Int) :description "Registration id"}
+                 :score   {:type (non-null Int)}
+                 :course  {:type (non-null :Course)}
+                 :student {:type (non-null :Student)}}}
+  }
+ :queries
+ {:get_course
+  {:type        :Course
+   :description "Get course by id."
+   :args        {:id {:type ID}}
+   :resolve     :query/get-course
+   }
+  }
+ }

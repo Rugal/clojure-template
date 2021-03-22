@@ -13,11 +13,15 @@
                  [org.postgresql/postgresql "42.2.2.jre7"]
                  ;ORM
                  [korma "0.4.3"]
+                 ;nrepl
+                 [nrepl/lein-nrepl "0.3.2"]
+                 ;graphql
+                 [com.walmartlabs/lacinia-pedestal "0.15.0"]
+                 [io.aviso/logging "0.2.0"]
                  [environ "1.2.0"]]
   :plugins [[lein-ring "0.12.5"]
             [lein-bikeshed "0.5.1"]
             [lein-environ "1.1.0"]
-            [lein-cprint "1.3.3"]
             [lein-pprint "1.3.2"]
             [lein-cloverage "1.2.2"]
             [com.github.metaphor/lein-flyway "6.0.0"]
