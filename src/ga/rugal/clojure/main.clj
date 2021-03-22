@@ -3,7 +3,7 @@
     [ga.rugal.clojure.controller.course :as c]
     [ga.rugal.clojure.controller.student :as s]
     [ga.rugal.clojure.controller.registration :as r]
-    [compojure.core :refer [defroutes]]
+    [compojure.core :refer [defroutes GET]]
     [compojure.route :refer [not-found]]
     [ring.middleware.json-response :refer [wrap-json-response]]
     [ring.middleware.params :refer [wrap-params]]
@@ -12,6 +12,7 @@
   (:gen-class))
 
 (defroutes router
+           (GET "/" [] {:status 200 :body {:status "UP"}})
            c/controller
            s/controller
            r/controller
