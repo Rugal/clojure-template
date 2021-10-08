@@ -9,8 +9,7 @@
       (is (= 200 (:status (b/request "/course/0" :get {}))))))
   (with-redefs [s/get (fn [id] nil)]
     (testing "not found"
-      (is (= 404 (:status (b/request "/course/0" :get {}))))))
-  )
+      (is (= 404 (:status (b/request "/course/0" :get {})))))))
 
 (deftest delete
   (with-redefs [s/get (fn [id] {:id 0 :name "test"})]
@@ -18,8 +17,7 @@
       (is (= 204 (:status (b/request "/course/0" :delete {}))))))
   (with-redefs [s/get (fn [id] nil)]
     (testing "not found"
-      (is (= 404 (:status (b/request "/course/0" :delete {}))))))
-  )
+      (is (= 404 (:status (b/request "/course/0" :delete {})))))))
 
 (deftest update
   (let [bean {:id 0 :name "test"}]
@@ -32,9 +30,7 @@
         (is (= 404 (:status (b/request "/course" :put {} bean))))))
     (with-redefs [s/get (fn [id] nil)]
       (testing "not found"
-        (is (= 404 (:status (b/request "/course/0" :put {} bean))))))
-    )
-  )
+        (is (= 404 (:status (b/request "/course/0" :put {} bean))))))))
 
 (deftest save
   (let [bean {:id 0 :name "test"}]
@@ -45,6 +41,4 @@
         (is (= 404 (:status (b/request "/course/1" :post {} bean))))))
     (with-redefs [s/save (fn [id] nil)]
       (testing "not found"
-        (is (= 400 (:status (b/request "/course" :post {} bean))))))
-    )
-  )
+        (is (= 400 (:status (b/request "/course" :post {} bean))))))))

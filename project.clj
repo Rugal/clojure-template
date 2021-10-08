@@ -2,12 +2,12 @@
   :description "A generic template for clojure"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
-  :dependencies [[org.clojure/clojure "1.10.0"]
-                 [compojure "1.6.1"]
+  :dependencies [[org.clojure/clojure "1.10.3"]
+                 [compojure "1.6.2"]
                  ;ring
-                 [ring/ring-jetty-adapter "1.9.2"]
-                 [ring/ring-defaults "0.3.2"]
-                 [ring/ring-json "0.4.0"]
+                 [ring/ring-jetty-adapter "1.9.4"]
+                 [ring/ring-defaults "0.3.3"]
+                 [ring/ring-json "0.5.1"]
                  [ring-json-response "0.2.0"]
                  ;database
                  [org.postgresql/postgresql "42.2.24"]
@@ -16,16 +16,16 @@
                  ;nrepl
                  [nrepl/lein-nrepl "0.3.2"]
                  ;graphql
-                 [com.walmartlabs/lacinia-pedestal "0.15.0"]
-                 [io.aviso/logging "0.2.0"]
+                 [com.walmartlabs/lacinia-pedestal "0.16.1"]
+                 [io.aviso/logging "1.0"]
                  [environ "1.2.0"]]
   :plugins [[lein-ring "0.12.5"]
-            [lein-bikeshed "0.5.1"]
-            [lein-environ "1.1.0"]
+            [lein-bikeshed "0.5.2"]
+            [lein-environ "1.2.0"]
             [lein-pprint "1.3.2"]
             [lein-cloverage "1.2.2"]
             [com.github.metaphor/lein-flyway "6.0.0"]
-            [com.jakemccrary/lein-test-refresh "0.23.0"]]
+            [com.jakemccrary/lein-test-refresh "0.25.0"]]
   :main ^:skip-aot ga.rugal.clojure.main
   :ring {:handler       ga.rugal.clojure.main/application
          :auto-reload?  true

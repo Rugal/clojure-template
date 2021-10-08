@@ -7,9 +7,9 @@
   "get course by id"
   [id]
   (first
-    (korma/select course
-                  (korma/fields :id :name)
-                  (korma/where {:id id}))))
+   (korma/select course
+                 (korma/fields :id :name)
+                 (korma/where {:id id}))))
 
 (defn save
   "save course"

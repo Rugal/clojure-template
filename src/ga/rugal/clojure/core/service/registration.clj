@@ -10,8 +10,8 @@
   (if-let [r (dao/get id)]
     (-> r
         (assoc
-          :student (s/get (:student_id r))
-          :course (c/get (:course_id r)))
+         :student (s/get (:student_id r))
+         :course (c/get (:course_id r)))
         (dissoc :course_id :student_id))))
 
 (defn save
@@ -20,9 +20,7 @@
   (if (and (:student_id bean) (:course_id bean) (:score bean))
     (if (and (s/get (:student_id bean)) (c/get (:course_id bean)))
       (dao/save bean)
-      (throw (ex-info "dependency not found" {:status 404})))
-    )
-  )
+      (throw (ex-info "dependency not found" {:status 404})))))
 
 (defn update
   "update"
@@ -30,9 +28,7 @@
   (if (and (:id bean) (:student_id bean) (:course_id bean) (:score bean))
     (if (and (dao/get (:id bean)) (s/get (:student_id bean)) (c/get (:course_id bean)))
       (dao/update bean)
-      (throw (ex-info "dependency not found" {:status 404})))
-    )
-  )
+      (throw (ex-info "dependency not found" {:status 404})))))
 
 (defn delete
   "delete"

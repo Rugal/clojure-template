@@ -9,10 +9,7 @@
       (is (= 200 (:status (b/request "/registration/0" :get {}))))))
   (with-redefs [s/get (fn [_] nil)]
     (testing "not found"
-      (is (= 404 (:status (b/request "/registration/0" :get {}))))
-      )
-    )
-  )
+      (is (= 404 (:status (b/request "/registration/0" :get {})))))))
 
 (deftest delete
   (with-redefs [s/get (fn [_] {:id 0 :name "test"})]
@@ -20,8 +17,7 @@
       (is (= 204 (:status (b/request "/registration/0" :delete {}))))))
   (with-redefs [s/get (fn [_] nil)]
     (testing "not found"
-      (is (= 404 (:status (b/request "/registration/0" :delete {}))))))
-  )
+      (is (= 404 (:status (b/request "/registration/0" :delete {})))))))
 
 (deftest update
   (with-redefs [s/update (fn [_] 1)]
@@ -32,8 +28,7 @@
       (is (= 400 (:status (b/request "/registration/0" :put {}))))))
   (with-redefs [s/update (fn [_] (throw (ex-info "dependency not found" {:status 404})))]
     (testing "not found"
-      (is (= 404 (:status (b/request "/registration/0" :put {}))))))
-  )
+      (is (= 404 (:status (b/request "/registration/0" :put {})))))))
 
 (deftest save
   (with-redefs [s/save (fn [_] {})]
@@ -44,5 +39,4 @@
       (is (= 400 (:status (b/request "/registration" :post {}))))))
   (with-redefs [s/save (fn [_] (throw (ex-info "dependency not found" {:status 404})))]
     (testing "not found"
-      (is (= 404 (:status (b/request "/registration" :post {}))))))
-  )
+      (is (= 404 (:status (b/request "/registration" :post {})))))))

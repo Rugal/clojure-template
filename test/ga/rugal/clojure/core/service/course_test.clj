@@ -10,10 +10,7 @@
       (testing "with parameter"
         (is (= (service/get 1) bean)))
       (testing "without parameter"
-        (is (= (service/get nil) nil)))
-      )
-    )
-  )
+        (is (= (service/get nil) nil))))))
 
 (deftest save
   (let [bean {:id 0 :name "test"}]
@@ -21,10 +18,7 @@
       (testing "with :name"
         (is (= (service/save bean) bean)))
       (testing "without :name"
-        (is (= (service/save (dissoc bean :name)) nil)))
-      )
-    )
-  )
+        (is (= (service/save (dissoc bean :name)) nil))))))
 
 (deftest update
   (let [bean {:id 0 :name "test"}]
@@ -34,16 +28,11 @@
       (testing "without :name"
         (is (= (service/update (dissoc bean :name)) nil)))
       (testing "without :id"
-        (is (= (service/update (dissoc bean :id)) nil)))
-      )
-    )
-  )
+        (is (= (service/update (dissoc bean :id)) nil))))))
 
 (deftest delete
   (with-redefs [dao/delete (fn [b] 1)]
     (testing "with parameter"
       (is (= (service/delete 0) 1)))
     (testing "without parameter"
-      (is (= (service/delete nil) nil)))
-    )
-  )
+      (is (= (service/delete nil) nil)))))

@@ -18,10 +18,7 @@
           (is (= (service/get 1) bean))))
       (with-redefs [dao/get (fn [id] nil)]
         (testing "without parameter"
-          (is (= (service/get 1) nil))))
-      )
-    )
-  )
+          (is (= (service/get 1) nil)))))))
 
 (deftest save
   (let [course {:id 0 :name "test" :age 0}
@@ -43,10 +40,7 @@
           (is (thrown? ExceptionInfo (service/save bean)))))
       (with-redefs [c/get (fn [b] nil)]
         (testing "course not found"
-          (is (thrown? ExceptionInfo (service/save bean)))))
-      )
-    )
-  )
+          (is (thrown? ExceptionInfo (service/save bean))))))))
 
 (deftest update
   (let [course {:id 0 :name "test" :age 0}
@@ -74,16 +68,11 @@
           (is (thrown? ExceptionInfo (service/update bean)))))
       (with-redefs [c/get (fn [b] nil)]
         (testing "course not found"
-          (is (thrown? ExceptionInfo (service/update bean)))))
-      )
-    )
-  )
+          (is (thrown? ExceptionInfo (service/update bean))))))))
 
 (deftest delete
   (with-redefs [dao/delete (fn [b] 1)]
     (testing "with parameter"
       (is (= (service/delete 0) 1)))
     (testing "without parameter"
-      (is (= (service/delete nil) nil)))
-    )
-  )
+      (is (= (service/delete nil) nil)))))
