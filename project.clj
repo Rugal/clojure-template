@@ -10,7 +10,7 @@
                  [ring/ring-json "0.4.0"]
                  [ring-json-response "0.2.0"]
                  ;database
-                 [org.postgresql/postgresql "42.2.2.jre7"]
+                 [org.postgresql/postgresql "42.2.24"]
                  ;ORM
                  [korma "0.4.3"]
                  ;nrepl
