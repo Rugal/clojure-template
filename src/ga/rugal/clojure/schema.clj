@@ -3,22 +3,17 @@
   (:require
    [clojure.java.io :as io]
    [clojure.edn :as edn]
-   [ga.rugal.clojure.core.service.course :as s]
    [com.walmartlabs.lacinia :as l]
    [com.walmartlabs.lacinia.schema :as schema]
-   [com.walmartlabs.lacinia.util :as util]))
-
-(defn- resolver-map
-  []
-  {:query/get-course
-   (fn [context args value] (let [{:keys [id]} args id (Integer. id)] (s/get id)))})
+   [com.walmartlabs.lacinia.util :as util]
+   [ga.rugal.clojure.graphql.index :as i]))
 
 (defn- load-schema
   []
   (-> (io/resource "schema.edn")
       slurp
       edn/read-string
-      (util/attach-resolvers (resolver-map))
+      (util/attach-resolvers (i/resolver-map))
       schema/compile))
 
 (defn q
