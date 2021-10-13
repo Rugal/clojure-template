@@ -5,6 +5,6 @@
 
 (def resolver
   {:get/registration
-   (fn [context args _]
+   (fn [_ args _]
      (let [{:keys [id]} args id (Integer. id)]
        (r/get id)))})

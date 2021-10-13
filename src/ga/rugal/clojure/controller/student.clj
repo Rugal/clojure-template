@@ -1,7 +1,7 @@
 (ns ga.rugal.clojure.controller.student
   "namespace for student controller"
   (:require [ga.rugal.clojure.core.service.student :as s]
-            [compojure.core :refer :all]
+            [compojure.core :refer [context GET POST PUT DELETE]]
             [compojure.coercions :refer [as-int]]))
 
 (defn- get [id]
@@ -10,13 +10,13 @@
     {:status 404}))
 
 (defn- save [bean]
-  (if-let [b (s/save bean)]
-    {:status 201 :body b}
+  (if-let [bean (s/save bean)]
+    {:status 201 :body bean}
     {:status 400}))
 
 (defn- delete [id]
-  (if-let [bean (s/get id)]
-    (let [r (s/delete id)] {:status 204})
+  (if (and (s/get id) (s/delete id))
+    {:status 204}
     {:status 404}))
 
 (defn- update [id bean]

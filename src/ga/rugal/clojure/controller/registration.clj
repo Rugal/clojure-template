@@ -1,7 +1,7 @@
 (ns ga.rugal.clojure.controller.registration
   "namespace for registration controller"
   (:require [ga.rugal.clojure.core.service.registration :as r]
-            [compojure.core :refer :all]
+            [compojure.core :refer [context GET POST PUT DELETE]]
             [compojure.coercions :refer [as-int]])
   (:import (clojure.lang ExceptionInfo)))
 
@@ -15,13 +15,11 @@
     (if-let [b (r/save bean)]
       {:status 201 :body b}
       {:status 400})
-    (catch ExceptionInfo e {:status (-> e ex-data :status)}))
-  )
+    (catch ExceptionInfo e {:status (-> e ex-data :status)})))
 
 (defn- delete [id]
-  (if (r/get id)
-    (let [_ (r/delete id)]
-      {:status 204})
+  (if (and (r/get id) (r/delete id))
+    {:status 204}
     {:status 404}))
 
 (defn- update [id bean]
@@ -29,8 +27,7 @@
     (if (r/update (assoc bean :id id))
       {:status 200}
       {:status 400})
-    (catch ExceptionInfo e {:status (-> e ex-data :status)}))
-  )
+    (catch ExceptionInfo e {:status (-> e ex-data :status)})))
 
 (def controller
   (context "/registration" []
