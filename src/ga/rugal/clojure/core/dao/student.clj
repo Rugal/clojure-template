@@ -1,14 +1,13 @@
 (ns ga.rugal.clojure.core.dao.student
   "namespace for student dao"
   (:require [korma.core :as korma])
-  (:require [ga.rugal.clojure.core.model.entity :refer :all]))
+  (:require [ga.rugal.clojure.core.model.entity :refer [student]]))
 
 (defn get
   "get student by id"
   [id]
   (first
    (korma/select student
-                 (korma/fields :id :name :age)
                  (korma/where {:id id}))))
 
 (defn save

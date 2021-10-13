@@ -8,7 +8,6 @@
   [id]
   (first
    (korma/select registration
-                 (korma/fields :id :score :student_id :course_id)
                  (korma/where {:id id}))))
 
 (defn save
