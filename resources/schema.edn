@@ -15,8 +15,10 @@
    :fields
    {:id      {:type (non-null Int) :description "Registration id"}
     :score   {:type (non-null Int)}
-    :course  {:type (non-null :Course)}
-    :student {:type (non-null :Student)}}}}
+    :course {:type (non-null :Course)
+             :resolve :get/course}
+    :student {:type (non-null :Student)
+              :resolve :get/student}}}}
  :queries
  {:course
   {:type        :Course

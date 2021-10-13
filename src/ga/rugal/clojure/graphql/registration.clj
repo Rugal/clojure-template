@@ -4,4 +4,7 @@
    [ga.rugal.clojure.core.service.registration :as r]))
 
 (def resolver
-  {:get/registration (fn [context args value] (let [{:keys [id]} args id (Integer. id)] (r/get id)))})
+  {:get/registration
+   (fn [context args _]
+     (let [{:keys [id]} args id (Integer. id)]
+       (r/get id)))})

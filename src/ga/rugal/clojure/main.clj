@@ -1,4 +1,5 @@
 (ns ga.rugal.clojure.main
+  "Main entrance."
   (:require
    [ga.rugal.clojure.controller.course :as c]
    [ga.rugal.clojure.controller.student :as s]

@@ -7,12 +7,7 @@
 (defn get
   "get registration by id"
   [id]
-  (if-let [r (dao/get id)]
-    (-> r
-        (assoc
-         :student (s/get (:student_id r))
-         :course (c/get (:course_id r)))
-        (dissoc :course_id :student_id))))
+  (dao/get id))
 
 (defn save
   "save"

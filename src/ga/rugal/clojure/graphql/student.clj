@@ -4,4 +4,6 @@
    [ga.rugal.clojure.core.service.student :as s]))
 
 (def resolver
-  {:get/student (fn [context args value] (let [{:keys [id]} args id (Integer. id)] (s/get id)))})
+  {:get/student
+   (fn [_ args value]
+     (s/get (or (:id args) (:course_id value))))})
