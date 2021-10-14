@@ -1,7 +1,8 @@
 (ns ga.rugal.clojure.core.dao.registration
   "namespace for registration dao"
-  (:require [korma.core :as korma])
-  (:require [ga.rugal.clojure.core.model.entity :refer :all]))
+  (:require
+   [korma.core :as korma]
+   [ga.rugal.clojure.core.model.entity :refer [registration]]))
 
 (defn get
   "get registration by id"

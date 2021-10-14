@@ -1,9 +1,11 @@
 (ns ga.rugal.clojure.controller.registration
   "namespace for registration controller"
-  (:require [ga.rugal.clojure.core.service.registration :as r]
-            [compojure.core :refer [context GET POST PUT DELETE]]
-            [compojure.coercions :refer [as-int]])
-  (:import (clojure.lang ExceptionInfo)))
+  (:require
+   [ga.rugal.clojure.core.service.registration :as r]
+   [compojure.core :refer [context GET POST PUT DELETE]]
+   [compojure.coercions :refer [as-int]])
+  (:import
+   (clojure.lang ExceptionInfo)))
 
 (defn- get [id]
   (if-let [bean (r/get id)]

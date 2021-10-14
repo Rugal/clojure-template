@@ -1,8 +1,9 @@
 (ns ga.rugal.clojure.controller.student
   "namespace for student controller"
-  (:require [ga.rugal.clojure.core.service.student :as s]
-            [compojure.core :refer [context GET POST PUT DELETE]]
-            [compojure.coercions :refer [as-int]]))
+  (:require
+   [ga.rugal.clojure.core.service.student :as s]
+   [compojure.core :refer [context GET POST PUT DELETE]]
+   [compojure.coercions :refer [as-int]]))
 
 (defn- get [id]
   (if-let [bean (s/get id)]

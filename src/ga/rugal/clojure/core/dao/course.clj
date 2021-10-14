@@ -1,7 +1,8 @@
 (ns ga.rugal.clojure.core.dao.course
   "namespace for course dao"
-  (:require [korma.core :as korma]
-            [ga.rugal.clojure.core.model.entity :refer :all]))
+  (:require
+   [korma.core :as korma]
+   [ga.rugal.clojure.core.model.entity :refer [course]]))
 
 (defn get
   "get course by id"

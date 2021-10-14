@@ -1,7 +1,8 @@
 (ns ga.rugal.clojure.core.model.db
   "Namespace for primary database connection configuration"
-  (:require [korma.db :refer [defdb]]
-            [environ.core :refer [env]]))
+  (:require
+   [korma.db :refer [defdb]]
+   [environ.core :refer [env]]))
 
 (def dbinfo
   "database connection definition"

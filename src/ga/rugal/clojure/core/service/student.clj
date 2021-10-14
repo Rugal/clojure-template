@@ -1,6 +1,7 @@
 (ns ga.rugal.clojure.core.service.student
   "namespace for student service"
-  (:require [ga.rugal.clojure.core.dao.student :as dao]))
+  (:require
+   [ga.rugal.clojure.core.dao.student :as dao]))
 
 (defn get
   "get by id"

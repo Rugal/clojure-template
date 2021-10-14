@@ -1,8 +1,9 @@
 (ns ga.rugal.clojure.core.service.registration
   "namespace for registration service"
-  (:require [ga.rugal.clojure.core.dao.registration :as dao]
-            [ga.rugal.clojure.core.service.student :as s]
-            [ga.rugal.clojure.core.service.course :as c]))
+  (:require
+   [ga.rugal.clojure.core.dao.registration :as dao]
+   [ga.rugal.clojure.core.service.student :as s]
+   [ga.rugal.clojure.core.service.course :as c]))
 
 (defn get
   "get registration by id"

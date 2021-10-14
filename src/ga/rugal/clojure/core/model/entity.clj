@@ -1,7 +1,8 @@
 (ns ga.rugal.clojure.core.model.entity
   "namespace for entity definition"
-  (:require [korma.core :refer [defentity table pk belongs-to has-many entity-fields]]
-            [ga.rugal.clojure.core.model.db :refer :all]))
+  (:require
+   [korma.core :refer [defentity table pk belongs-to has-many entity-fields]]
+   [ga.rugal.clojure.core.model.db :refer :all]))
 
 (declare student course registration)
 
