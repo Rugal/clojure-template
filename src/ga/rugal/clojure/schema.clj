@@ -8,14 +8,14 @@
    [com.walmartlabs.lacinia.util :as util]
    [ga.rugal.clojure.graphql.index :as i]))
 
-(defn- load-schema
-  []
-  (-> (io/resource "schema.edn")
-      slurp
-      edn/read-string
-      (util/attach-resolvers (i/resolver-map))
-      schema/compile))
-
 (defn q
   [query-string]
-  (l/execute (load-schema) query-string nil nil))
+  (l/execute
+   (-> (io/resource "schema.edn")
+       slurp
+       edn/read-string
+       (util/attach-resolvers (i/resolver-map))
+       schema/compile)
+   query-string
+   nil
+   nil))

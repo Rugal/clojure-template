@@ -1,0 +1,6 @@
+{:adapter/jetty {:port 8080, :handler #ig/ref :application/main}
+ :application/main {:router #ig/ref :application/router}
+ :application/router {:graphql #ig/ref :graphql/controller}
+ :graphql/controller {:executor #ig/ref :graphql/executor}
+ :graphql/executor {:schema "schema.edn", :resolver #ig/ref :graphql/resolver}
+ :graphql/resolver {}}
