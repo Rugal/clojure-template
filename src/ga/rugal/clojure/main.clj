@@ -9,7 +9,8 @@
    [compojure.route :refer [not-found]]
    [ring.middleware.json-response :refer [wrap-json-response]]
    [ring.middleware.params :refer [wrap-params]]
-   [ring.adapter.jetty :as j])
+   [ring.adapter.jetty :as j]
+   [integrant.core :as ig])
   (:gen-class))
 
 (defroutes router

@@ -18,6 +18,7 @@
                  ;graphql
                  [com.walmartlabs/lacinia-pedestal "0.16.1"]
                  [io.aviso/logging "1.0"]
+                 [integrant "0.8.0"]
                  [environ "1.2.0"]]
   :plugins [[lein-ring "0.12.5"]
             [lein-bikeshed "0.5.2"]
