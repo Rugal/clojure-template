@@ -23,5 +23,5 @@
       (wrap-json-response)
       (wrap-params)))
 
-(defn -main []
+(defn -main "Main function" []
   (ig/init config))

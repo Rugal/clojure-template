@@ -20,28 +20,35 @@
     :student {:type (non-null :Student)
               :resolve :get/student}}}}
  :queries
- {:get_course
+ {:course
   {:type        :Course
    :description "Get course by id."
    :args        {:id {:type Int}}
    :resolve     :get/course}
 
-  :get_student
+  :student
   {:type        :Student
    :description "Get student by id."
    :args        {:id {:type Int}}
    :resolve     :get/student}
 
-  :get_registration
+  :registration
   {:type        :Registration
    :description "Get registration by id."
    :args        {:id {:type Int}}
    :resolve     :get/registration}}
 
  :mutations
- {:add_course
+ {:course
   {:type :Course
    :description "Add course"
    :args
    {:name {:type (non-null String)}}
-   :resolve :post/course}}}
+   :resolve :post/course}
+  :student
+  {:type :Student
+   :description "Add student"
+   :args
+   {:name {:type (non-null String)}
+    :age  {:type (non-null Int)}}
+   :resolve :post/student}}}

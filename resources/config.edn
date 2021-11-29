@@ -12,16 +12,16 @@
 ;;  student
  :resolver/student {:get #ig/ref :service/student:get
                     ;; :delete #ig/ref :service/student:delete
-                    ;; :save #ig/ref :service/student:save
+                    :post #ig/ref :service/student:post
                     ;; :update #ig/ref :service/student:update
                     }
  :service/student:get    {:get #ig/ref :dao/student:get}
-;;  :service/student:delete {:delete #ig/ref :dao/student:delete}
-;;  :service/student:save   {:save #ig/ref :dao/student:save}
-;;  :service/student:update {:update #ig/ref :dao/student:update}
+ :service/student:post   {:post #ig/ref :dao/student:post}
  :dao/student:get    {:db #ig/ref :database/connection}
+ :dao/student:post   {:db #ig/ref :database/connection}
+;;  :service/student:delete {:delete #ig/ref :dao/student:delete}
+;;  :service/student:update {:update #ig/ref :dao/student:update}
 ;;  :dao/student:delete {:db #ig/ref :database/connection}
-;;  :dao/student:save   {:db #ig/ref :database/connection}
 ;;  :dao/student:update {:db #ig/ref :database/connection}
 
 ;;  course

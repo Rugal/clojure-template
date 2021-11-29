@@ -9,12 +9,9 @@
 (defmethod ig/init-key :dao/student:get [_ {:keys [db]}]
   (fn [id] (first (korma/select student (korma/where {:id id})))))
 
-(defn save
-  "save student"
-  [bean]
-  (korma/insert student
-                (korma/values {:name (:name bean)
-                               :age  (:age bean)})))
+(defmethod ig/init-key :dao/student:post [_ {:keys [db]}]
+  (fn [bean] (korma/insert student (korma/values {:name (:name bean)
+                                                  :age  (:age bean)}))))
 
 (defn update
   "update student"
