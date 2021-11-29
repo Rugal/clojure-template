@@ -9,11 +9,8 @@
 (defmethod ig/init-key :dao/course:get [_ {:keys [db]}]
   (fn [id] (first (korma/select course (korma/where {:id id})))))
 
-(defn save
-  "save course"
-  [bean]
-  (korma/insert course
-                (korma/values {:name (:name bean)})))
+(defmethod ig/init-key :dao/course:post [_ {:keys [db]}]
+  (fn [bean] (korma/insert course (korma/values {:name (:name bean)}))))
 
 (defn update
   "update course"

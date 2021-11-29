@@ -7,11 +7,8 @@
 (defmethod ig/init-key :service/course:get [_ {:keys [get]}]
   (fn [id] (if id (get id) nil)))
 
-(defn save
-  "save"
-  [bean]
-  (if (:name bean)
-    (dao/save bean)))
+(defmethod ig/init-key :service/course:post [_ {:keys [post]}]
+  (fn [bean] (if (:name bean) (post bean) nil)))
 
 (defn update
   "update"

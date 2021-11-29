@@ -45,3 +45,9 @@ lein test :only namespace_name
 ```shell
 lein test :only namespace_name/testname
 ```
+
+## mutaton
+
+```shell
+echo 'mutation {add_course(name: "Rugal") {id name} }' | http POST localhost:8080/graphql
+```

@@ -25,9 +25,12 @@
 ;;  :dao/student:update {:db #ig/ref :database/connection}
 
 ;;  course
- :resolver/course     {:get #ig/ref :service/course:get}
+ :resolver/course     {:get #ig/ref :service/course:get
+                       :post #ig/ref :service/course:post}
  :service/course:get  {:get #ig/ref :dao/course:get}
+ :service/course:post {:post #ig/ref :dao/course:post}
  :dao/course:get      {:db #ig/ref :database/connection}
+ :dao/course:post     {:post #ig/ref :database/connection}
 
 ;;  registration
  :resolver/registration    {:get #ig/ref :service/registration:get}
