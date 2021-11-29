@@ -27,7 +27,7 @@
             [lein-cloverage "1.2.2"]
             [com.github.metaphor/lein-flyway "6.0.0"]
             [com.jakemccrary/lein-test-refresh "0.25.0"]]
-  :main ^:skip-aot ga.rugal.clojure.rugal
+  :main ^:skip-aot ga.rugal.clojure.main
   :ring {:handler       ga.rugal.clojure.main/application
          :auto-reload?  true
          :auto-refresh? true}

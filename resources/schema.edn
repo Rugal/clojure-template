@@ -23,17 +23,17 @@
  {:course
   {:type        :Course
    :description "Get course by id."
-   :args        {:id {:type ID}}
+   :args        {:id {:type Int}}
    :resolve     :get/course}
 
   :student
   {:type        :Student
    :description "Get student by id."
-   :args        {:id {:type ID}}
+   :args        {:id {:type Int}}
    :resolve     :get/student}
 
   :registration
   {:type        :Registration
    :description "Get registration by id."
-   :args        {:id {:type ID}}
+   :args        {:id {:type Int}}
    :resolve     :get/registration}}}

@@ -1,13 +1,11 @@
 (ns ga.rugal.clojure.core.service.student
   "namespace for student service"
   (:require
-   [ga.rugal.clojure.core.dao.student :as dao]))
+   [ga.rugal.clojure.core.dao.student :as dao]
+   [integrant.core :as ig]))
 
-(defn get
-  "get by id"
-  [id]
-  (if id
-    (dao/get id)))
+(defmethod ig/init-key :service/student:get [_ {:keys [get]}]
+  (fn [id] (if id (get id) nil)))
 
 (defn save
   "save"

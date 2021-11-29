@@ -1,15 +1,13 @@
 (ns ga.rugal.clojure.core.dao.student
   "namespace for student dao"
   (:require
-   [korma.core :as korma]
-   [ga.rugal.clojure.core.model.entity :refer [student]]))
+   [ga.rugal.clojure.core.model.db :refer :all]
+   [ga.rugal.clojure.core.model.entity :refer [student]]
+   [integrant.core :as ig]
+   [korma.core :as korma]))
 
-(defn get
-  "get student by id"
-  [id]
-  (first
-   (korma/select student
-                 (korma/where {:id id}))))
+(defmethod ig/init-key :dao/student:get [_ {:keys [db]}]
+  (fn [id] (first (korma/select student (korma/where {:id id})))))
 
 (defn save
   "save student"

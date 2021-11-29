@@ -1,15 +1,13 @@
 (ns ga.rugal.clojure.core.dao.registration
   "namespace for registration dao"
   (:require
-   [korma.core :as korma]
-   [ga.rugal.clojure.core.model.entity :refer [registration]]))
+   [ga.rugal.clojure.core.model.db :refer :all]
+   [ga.rugal.clojure.core.model.entity :refer [registration]]
+   [integrant.core :as ig]
+   [korma.core :as korma]))
 
-(defn get
-  "get registration by id"
-  [id]
-  (first
-   (korma/select registration
-                 (korma/where {:id id}))))
+(defmethod ig/init-key :dao/registration:get [_ {:keys [db]}]
+  (fn [id] (first (korma/select registration (korma/where {:id id})))))
 
 (defn save
   "save registration"

@@ -1,13 +1,11 @@
 (ns ga.rugal.clojure.core.service.course
   "namespace for course service"
   (:require
-   [ga.rugal.clojure.core.dao.course :as dao]))
+   [ga.rugal.clojure.core.dao.course :as dao]
+   [integrant.core :as ig]))
 
-(defn get
-  "get by id"
-  [id]
-  (if id
-    (dao/get id)))
+(defmethod ig/init-key :service/course:get [_ {:keys [get]}]
+  (fn [id] (if id (get id) nil)))
 
 (defn save
   "save"

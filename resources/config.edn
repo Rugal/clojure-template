@@ -1,6 +1,37 @@
 {:adapter/jetty {:port 8080, :handler #ig/ref :application/main}
+
  :application/main {:router #ig/ref :application/router}
  :application/router {:graphql #ig/ref :graphql/controller}
+
  :graphql/controller {:executor #ig/ref :graphql/executor}
  :graphql/executor {:schema "schema.edn", :resolver #ig/ref :graphql/resolver}
- :graphql/resolver {}}
+ :graphql/resolver {:student #ig/ref :resolver/student
+                    :course #ig/ref :resolver/course
+                    :registration #ig/ref :resolver/registration}
+
+;;  student
+ :resolver/student {:get #ig/ref :service/student:get
+                    ;; :delete #ig/ref :service/student:delete
+                    ;; :save #ig/ref :service/student:save
+                    ;; :update #ig/ref :service/student:update
+                    }
+ :service/student:get    {:get #ig/ref :dao/student:get}
+;;  :service/student:delete {:delete #ig/ref :dao/student:delete}
+;;  :service/student:save   {:save #ig/ref :dao/student:save}
+;;  :service/student:update {:update #ig/ref :dao/student:update}
+ :dao/student:get    {:db #ig/ref :database/connection}
+;;  :dao/student:delete {:db #ig/ref :database/connection}
+;;  :dao/student:save   {:db #ig/ref :database/connection}
+;;  :dao/student:update {:db #ig/ref :database/connection}
+
+;;  course
+ :resolver/course     {:get #ig/ref :service/course:get}
+ :service/course:get  {:get #ig/ref :dao/course:get}
+ :dao/course:get      {:db #ig/ref :database/connection}
+
+;;  registration
+ :resolver/registration    {:get #ig/ref :service/registration:get}
+ :service/registration:get {:get #ig/ref :dao/registration:get}
+ :dao/registration:get     {:db #ig/ref :database/connection}
+
+ :database/connection {}}
